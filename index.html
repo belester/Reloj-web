@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mini Reloj</title>
+	<style type="text/css">
+
+		div {
+			display: flex;
+			margin-left: 20px;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.hora #ampm {
+			margin-left: 8px;
+			font-size: 50px;
+			color: #525660;
+			text-transform: lowercase;
+		}
+
+		.hora p {
+			margin: 0;
+			font-size: 80px;
+			margin-top: 50px;
+		}
+
+		.fecha p {
+			margin: 0;
+			margin-right: 15px;
+			font-size: 50px;
+			font-size: italic;
+			color: #525660;	
+		}
+	</style>
+</head>
+<body>
+	<div class="hora">
+		<p id="horas">7</p>
+		<p>:</p>
+		<p id="minutos">59</p>
+		<p>:</p>
+		<p id="segundos">20</p>
+		<p id="ampm">PM</p>
+	</div>
+	<br>
+	<div class="fecha">
+		<p id="diaSe">Domingo</p>
+		<p id="dia">4</p>
+		<p>de</p>
+		<p id="mes">Mayo</p>
+		<p>del</p>
+		<p id="year">2021</p>	
+	</div>
+	<script type="text/javascript">
+
+		(function actualizarDatos() {
+			var fecha = new Date(),
+				ampm,
+				horas = fecha.getHours(),
+				minutos = fecha.getMinutes(),
+				segundos = fecha.getSeconds(),
+				diaSemana = fecha.getDay(),
+				dias = fecha.getDate(),
+				mes = fecha.getMonth(),
+				year = fecha.getFullYear();
+
+			var elementosHoras = document.getElementById("horas"),
+				elementosMinutos = document.getElementById("minutos"),
+				elementosSegundos = document.getElementById("segundos"),
+				elementosAmpm = document.getElementById("ampm"),
+				elementosDiasSemana = document.getElementById("diaSe"),
+				elemtosDias = document.getElementById("dia"),
+				elemtosMes = document.getElementById("mes"),
+				elementosYear = document.getElementById("year");
+
+
+			var arrayDia = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
+			var arrayMes = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+			if (horas > 12) {
+				horas = horas - 12;
+				ampm = "PM";
+			} 
+
+			if (minutos < 10) {
+				minutos = "0" + minutos;
+			}
+
+			if (segundos < 10) {
+				segundos = "0" + segundos;
+			}
+
+			elementosHoras.textContent = horas;
+			elementosMinutos.textContent = minutos;
+			elementosSegundos.textContent = segundos;
+			elementosAmpm.textContent = ampm;
+
+
+			elementosDiasSemana.textContent = arrayDia[diaSemana];
+			elemtosDias.textContent = dias;
+			elemtosMes.textContent = arrayMes[mes];
+			elementosYear.textContent = year;
+
+
+			// setInterval(actualizarDatos, 1000);
+		}());
+	</script>
+</body>
+</html>
